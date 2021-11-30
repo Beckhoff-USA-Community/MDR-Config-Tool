@@ -1,0 +1,28 @@
+Create a tool that will help find and adjust parameters of an EP7402 (which will be released in May).
+
+
+
+	1. Read spreadsheet
+		a. Figure out the format of the spreadsheet
+		b. Create a method to open the file
+		c. Save the file's content to a collection within the program
+	2. Display the contents of the Spreadsheet to the User in a Windows form
+		a. Using Collection 
+		b. Create a DataTable Object
+		c. Assign collection's items to the DataTable
+		d. Create a DataTableView object, fill it with DataTable
+	3. Wait for user feedback
+		a. Have a Next Button
+	4. Create I/O based on spreadsheet and link I/O to PLC
+		a. Create a loop that goes through the collection from the spreadsheet
+		b. Within each loop, create an I/O tree item
+		c. Read the current item's link information
+		d. Create the link
+	5. Report success of I/O creation and linking
+	6. Wait for user Feedback
+	7. Parameterize each drive
+		a. Read the motor xml file
+		b. Create a collection of the xml file's parameters
+		c. Check each parameter names for possible CoE index equivalents
+		d. Write the parameter value to the CoE address
+? 
