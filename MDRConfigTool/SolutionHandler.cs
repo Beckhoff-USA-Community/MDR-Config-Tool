@@ -13,6 +13,7 @@ using System.Xml;
 using System.Xml.Linq;
 
 using TwinCAT.Ads;
+using TwinCAT.Ads.TypeSystem;
 using System.Windows.Forms;
 using System.Data;
 using System.Text.RegularExpressions;
@@ -26,7 +27,7 @@ namespace MDRConfigTool
         private  EnvDTE.Project pro;
         private  EnvDTE.Solution sol;
 
-        private  TcAdsClient adsClient;
+        private  AdsClient adsClient;
         private  string declarations;
 
         private  string BASEFOLDER;
@@ -45,11 +46,12 @@ namespace MDRConfigTool
             sol = dte.Solution;
             pro = sol.Projects.Item(1);
             sysMan = (ITcSysManager11)pro.Object;
-            adsClient = new TcAdsClient();
+            adsClient = new AdsClient();
             ITcSmTreeItem drive = sysMan.LookupTreeItem(@"TIID^Device_1^InfeedWest0");
 
             LinkIoToPlc(drive);
 
+            
             
 
         }
@@ -57,7 +59,7 @@ namespace MDRConfigTool
         {
             this.BASEFOLDER = filePath;
             this._solutionName = _tcProjectName = FileName;
-            this.adsClient = new TcAdsClient();
+            this.adsClient = new AdsClient();
             MessageFilter.Register();
 
             /* -----------------------------------------------------------------
@@ -278,7 +280,7 @@ END_VAR";
                 Debug.WriteLine(ex.Message);
             }
         }
-
+        //THis method is used for testing by attaching AI to an existing project
         public  EnvDTE.DTE attachToExistingDte(string solutionPath, string progId)
         {
             EnvDTE.DTE dte = null;
@@ -391,7 +393,7 @@ END_VAR";
 
         public void ActivateConfiguration()
         {
-            //    adsClient = new TcAdsClient();
+            //    adsClient = new AdsClient();
             //    adsClient.Connect(10000);
             //   adsClient.WriteControl(new StateInfo(AdsState.Start, adsClient.ReadState().DeviceState));
             sysMan.ActivateConfiguration();
